@@ -1,8 +1,6 @@
-// Main enter program
 #include <iostream>
 #include <vector>
 #include <variant>
-
 #include "F01_read_inputs.h"
 #include "F02_read_displacements.h"
 #include "F03_common.h"

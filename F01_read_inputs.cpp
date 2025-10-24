@@ -7,15 +7,13 @@ void Simulation::read_input(std::string f){
         std::cerr << "Could not open file!\n"; 
     };
 
-    std::string line; // collector for line
-    while (std::getline(file, line)) { // line by line into line
-        std::istringstream iss(line); // treat line as stream
+    std::string line; 
 
-        std::vector<std::vector<std::string>> data; // 
+    while (std::getline(file, line)) { 
+        std::istringstream iss(line); 
 
         std::vector<std::string> tokens;
         std::string word;
-
         std::string varType; // when parsing in file
         float val; // parsing in file
 
