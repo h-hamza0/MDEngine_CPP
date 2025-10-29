@@ -43,6 +43,7 @@
         "queue": "cpp",
         "ratio": "cpp",
         "stack": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "fstream": "cpp"
     }
 }

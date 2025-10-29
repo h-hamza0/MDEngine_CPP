@@ -2,17 +2,26 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <variant>
 #include <vector>
 using namespace std;
-
-void read_input();
 
 class Simulation{
 public:
     void read_input(std::string);
-private:
-    float DT;
+    void allot_memory(int);
+    void read_system(std::string);
+    void displacement();
+    vector<vector<float>> ACCEL;
+    vector<vector<float>> FORCE;
+    vector<vector<float>> VELO;
+    vector<vector<float>> POST;
+    float box_L;
+    float box_B;
+    float box_H;
+    int N_ATOMS;
     float TOT_STEPS;
+    float DT;
     float PRESS_INTVL;
     float SLAB_THICK;
     float THERMOSTAT;
@@ -52,3 +61,8 @@ private:
     int box_H;
 };
 
+struct KineticResult {
+    float T_BULK;
+    vector<float> kinetic;
+    float KE;
+};
