@@ -4,6 +4,7 @@
 #include <string>
 #include <variant>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 class Simulation{
@@ -65,4 +66,10 @@ struct KineticResult {
     float T_BULK;
     vector<float> kinetic;
     float KE;
+};
+
+struct ForceResult{
+    float accumulation;
+    float potential;
+    vector<int> virial;
 };

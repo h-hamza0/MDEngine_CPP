@@ -2,6 +2,8 @@
 #include <vector>
 #include <variant>
 #include "Simulation.h"
+#include "Algorithms.h" 
+#include "Utility.h"
 // include other files below here
 using namespace std;
 
@@ -16,6 +18,8 @@ using VarType = std::variant<float, vector<float>>;
 // float box_VOL = init.box_L * init.box_B * init.box_H;
 int main() {
     Simulation init;
+    Algorithms algos;
+    Utility util;
     init.read_input("RUN_PARAMETERS.cfg");
     init.read_system("argon.csv");
     float mass = 39.9;
@@ -23,7 +27,15 @@ int main() {
     float box_VOL = init.box_L * init.box_B * init.box_H;
     for (int i = 1; i < init.TOT_STEPS; i++){
         bool pressure = false;
-
+        algos.velocity_verlet(init);
+        util.check_and_update(init);
+        util.compute_velocity(init);
+        if (i % 50 == 0){
+            pressure = true;
+            PRESS_COUNT += 1; 
+        };
+        util.clear_force();
+        
     }
     // for (int i = 1; i < init.TOT_STEPS; i++){
     //     bool pressure = false;

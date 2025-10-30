@@ -13,7 +13,7 @@ void Simulation::read_input(std::string f){
         std::istringstream iss(line); 
         std::vector<std::string> tokens;
         std::string word;
-        std::string varType; // when parsing in file
+        std::string varType;
         float val;
 
         while (iss >> word) {
