@@ -130,7 +130,7 @@ ForceResult Utility::compute_force(Simulation &simulation){
     float LJ2 = -7*sig12*pow(rcut, -12) + 4*sig6*pow(rcut, -6);
     float LJ3 = (48*eps*sig12*pow(rcut, -12) - 24*eps*sig6*pow(rcut, -6)) / rcut2;
     float eww = 0;
-    vector<int> virial = {0, 0, 0};
+    vector<float> virial = {0, 0, 0};
 
     for (int i = 0; i < n_atoms; i++){
         float xi = simulation.POST[i][0];
@@ -164,7 +164,6 @@ ForceResult Utility::compute_force(Simulation &simulation){
                     xij -= length;
                 }
             }
-
             if (abs(yij) > half_B){
                 if (yij < 0){
                     yij += base;
@@ -173,9 +172,7 @@ ForceResult Utility::compute_force(Simulation &simulation){
                     yij -= base;
                 }
             }
-
             float rsqr = xij * xij + yij * yij + zij * zij;
-
             if (rsqr < rcut2){
                 float irr = 1 / rsqr;
                 float ir6 = irr * irr * irr;
@@ -197,6 +194,7 @@ ForceResult Utility::compute_force(Simulation &simulation){
             }
         }
     }
+    
     ret.accumulation = eww/n_atoms;
     ret.potential = 0;
     ret.virial = virial;

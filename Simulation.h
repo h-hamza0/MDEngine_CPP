@@ -71,5 +71,5 @@ struct KineticResult {
 struct ForceResult{
     float accumulation;
     float potential;
-    vector<int> virial;
+    vector<float> virial;
 };
