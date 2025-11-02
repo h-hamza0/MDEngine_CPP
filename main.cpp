@@ -55,7 +55,9 @@ int main() {
         };
         float e_total = eww + ewpt;
         out.write_res(KE, e_total, t_bulk, i);
+        if (std::fmod(i, init.nstxout) == 0){
         out.write_xyz(init, i);
+        }
         cout << "Exec = " << (i * 100) / init.TOT_STEPS << " %, PE = " << eww << " T = " << t_bulk << endl;
     }
     cout << "End program" << '\n';
