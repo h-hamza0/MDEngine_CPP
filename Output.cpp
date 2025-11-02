@@ -40,8 +40,14 @@ void Output::write_xyz(Simulation &simulation, float STEP){
         f << n_atoms << std::endl;
         f << "@ " << curr << " ps" << std::endl;
         for (int i = 0; i < n_atoms; i ++){
-            f << 
+            f << left << setw(2) << "Ar"
+              << right << fixed << setprecision(6)
+              << setw(15) << simulation.POST[i][0] * 10
+              << setw(15) << simulation.POST[i][1] * 10
+              << setw(15) << simulation.POST[i][2] * 10
+              << '\n';
         }
+        f.close();
     }
 }
 
