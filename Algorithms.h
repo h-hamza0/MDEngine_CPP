@@ -4,7 +4,8 @@
 #include <string>
 #include <variant>
 #include <vector>
-#include <Simulation.h>
+#include "Simulation.h"
+#pragma once
 using namespace std;
 
 class Algorithms{

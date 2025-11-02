@@ -78,6 +78,7 @@ void Simulation::allot_memory(int ARG) {
 
 void Simulation::read_system(std::string f){
     std::ifstream file(f);
+    cout << "File in argon.csv" << endl;
     bool firstLine = true;
     if (!file.is_open()) {
         std::cerr << "FILE COULD NOT BE OPENED\n";
@@ -99,7 +100,7 @@ void Simulation::read_system(std::string f){
     };
     file.close();
     N_ATOMS = std::stoi(data[0][0]);
-    for (int i = 1; i < N_ATOMS; i++) {
+    for (int i = 1; i < N_ATOMS + 1; i++) {
         std::vector<float> b, c;
         b.push_back(std::stof(data[i][2]));
         b.push_back(std::stof(data[i][3]));
@@ -109,10 +110,12 @@ void Simulation::read_system(std::string f){
         c.push_back(std::stof(data[i][7]));
         POST.push_back(b);
         VELO.push_back(c);
+        
     }
-    box_L = std::stof(data[-1][0]);
-    box_B = std::stof(data[-1][1]);
-    box_H = std::stof(data[-1][2]);
+    box_L = std::stof(data[data.size() - 1][0]);
+    box_B = std::stof(data[data.size() - 1][1]);
+    box_H = std::stof(data[data.size() - 1][2]);
+    allot_memory(N_ATOMS);
 };
 
 void Simulation::displacement(){

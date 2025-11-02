@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++20 -O2 -Wall
 
-SRC = main.cpp Simulation.cpp
+SRC = main.cpp Simulation.cpp Algorithms.cpp Output.cpp Utility.cpp
 OBJ = $(SRC:.cpp=.o)
 EXEC = simulation
 

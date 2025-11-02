@@ -5,6 +5,7 @@
 #include <variant>
 #include <vector>
 #include <cmath>
+#pragma once
 using namespace std;
 
 class Simulation{

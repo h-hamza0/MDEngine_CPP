@@ -4,8 +4,8 @@
 #include <string>
 #include <variant>
 #include <iostream>
-#include <Simulation.h>
-
+#include "Simulation.h"
+#pragma once
 class Output{
 public:
     void write_virial(vector<float> &virial, vector<float> &kinetic, float box_VOL, float STEP);

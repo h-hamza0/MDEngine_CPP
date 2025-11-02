@@ -4,7 +4,8 @@
 #include <variant>
 #include <fstream>
 #include <vector>
-#include <Simulation.h>
+#include "Simulation.h"
+#pragma once
 using namespace std;
 
 class Utility{

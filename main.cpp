@@ -4,6 +4,7 @@
 #include "Simulation.h"
 #include "Algorithms.h" 
 #include "Utility.h"
+#include "Output.h"
 // include other files below here
 using namespace std;
 
@@ -15,8 +16,11 @@ int main() {
     Utility util;
     ForceResult fc;
     KineticResult ke;
+    Output out;
     init.read_input("RUN_PARAMETERS.cfg");
+    cout << "Read input" << endl;
     init.read_system("argon.csv");
+    cout << "Read system" << endl;
     float mass = 39.9;
     int PRESS_COUNT = 0;
     float box_VOL = init.box_L * init.box_B * init.box_H;
@@ -46,6 +50,13 @@ int main() {
         if (init.THERMOSTAT != 0){
             algos.velocity_scaling(init, t_bulk);
         }
+        if (std::fmod(i, init.PRESS_INTVL) == 0){
+            out.write_virial(virial, kin, box_VOL, i);
+        };
+        float e_total = eww + ewpt;
+        out.write_res(KE, e_total, t_bulk, i);
+        out.write_xyz(init, i);
+        cout << "Exec = " << (i * 100) / init.TOT_STEPS << " %, PE = " << eww << " T = " << t_bulk << endl;
     }
     cout << "End program" << '\n';
     return 0;

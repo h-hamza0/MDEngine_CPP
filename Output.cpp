@@ -1,4 +1,4 @@
-#include <Output.h>
+#include "Output.h"
 
 void Output::write_virial(vector<float> &virial, vector<float> &kinetic, float box_VOL, float STEP){
     if (STEP == 1) {
@@ -39,5 +39,24 @@ void Output::write_xyz(Simulation &simulation, float STEP){
         std::ofstream f("traj_path.xyz", std::ios::app);
         f << n_atoms << std::endl;
         f << "@ " << curr << " ps" << std::endl;
+        for (int i = 0; i < n_atoms; i ++){
+            f << 
+        }
     }
 }
+
+void Output::write_res(float KE, float PE, float T, float STEP){
+    if (STEP == 1){
+        std::ofstream f("energy.res");
+        if (!f.is_open()){
+            std::cerr << "File can not be opened";
+        } else {
+            f << "Step" << "\t" << "T[K]" << "\t" << "KE" << "\t" << "PE" << "TotalE";
+        }
+    } else {
+        std::ofstream f("energy.res", std::ios::app);
+        float TE = KE + PE;
+        f << STEP << "\t" << T << "\t" << KE << "\t" << PE << "\t" << TE;
+    };
+    
+};

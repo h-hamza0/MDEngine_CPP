@@ -1,4 +1,4 @@
-#include <Utility.h>
+#include "Utility.h"
 
 void Utility::check_and_update(Simulation &simulation){
     float length = simulation.box_L;
@@ -194,7 +194,7 @@ ForceResult Utility::compute_force(Simulation &simulation){
             }
         }
     }
-    
+
     ret.accumulation = eww/n_atoms;
     ret.potential = 0;
     ret.virial = virial;
