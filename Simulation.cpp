@@ -31,7 +31,8 @@ void Simulation::read_input(std::string f){
                     PRESS_INTVL = val;
                 } else if (varType == "SLAB_THICK") {
                     SLAB_THICK = val;
-                } else if (varType == "THREMOSTAT") {
+                } else if (varType == "THERMOSTAT") {
+                    cout << val << endl;
                     THERMOSTAT = val;
                 } else if (varType == "T_REF") {
                     T_REF = val;
