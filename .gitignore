@@ -1,0 +1,15 @@
+.DS_Store
+
+*.o
+simulation
+/build/
+bin/
+dist/
+*.res
+*.xyz
+*.csv
+*.log
+.vscode/
+.idea/
+*.swp
+
