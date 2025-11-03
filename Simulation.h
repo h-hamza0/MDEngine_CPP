@@ -5,8 +5,15 @@
 #include <variant>
 #include <vector>
 #include <cmath>
+
 #pragma once
 using namespace std;
+
+class Algorithms;
+class Output;
+class Utility;
+struct ForceResult;
+struct KineticResult;
 
 class Simulation{
 public:
@@ -14,6 +21,8 @@ public:
     void allot_memory(int);
     void read_system(std::string);
     void displacement();
+    void integrate(Algorithms* &algos, Utility &util, int &PRESS_COUNT, int &i, ForceResult &fc, 
+                    float &mass, KineticResult &ke, Output* &out, float &box_VOL);
     vector<vector<float>> ACCEL;
     vector<vector<float>> FORCE;
     vector<vector<float>> VELO;
@@ -41,6 +50,9 @@ public:
     float top_w;
     float bot_w;
     float TAU;
+    float EWW;
+    float T_BULK;
+    float E_TOTAL;
 };
 
 class Memory {

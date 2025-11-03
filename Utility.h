@@ -8,6 +8,8 @@
 #pragma once
 using namespace std;
 
+class Simulation;
+
 class Utility{
 public:
     void check_and_update(Simulation &simulation);

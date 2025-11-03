@@ -1,5 +1,46 @@
 #include "Simulation.h"
+#include "Algorithms.h"
+#include "Output.h"
+#include "Utility.h"
 
+void Simulation::integrate(Algorithms* &algos, Utility &util, int &PRESS_COUNT, int &i, ForceResult &fc, float &mass, KineticResult &ke, Output* &out, float &box_VOL){
+    bool pressure = false;
+    algos -> velocity_verlet(*this);
+    util.check_and_update(*this);
+    util.compute_velocity(*this);
+    if (i % 50 == 0){
+        pressure = true;
+        PRESS_COUNT += 1; 
+    };
+    util.clear_force(*this);
+    fc = util.compute_force(*this);
+    float eww = fc.accumulation;
+    float ewpt = fc.potential;
+    vector<float> virial = fc.virial;
+    util.find_acceleration(*this, mass);
+    util.compute_velocity(*this);
+    if (std::fmod(i, this->NST_COMM) == 0){
+        util.com_removal(*this);
+    };
+    ke = util.find_ke_temp(*this, mass);
+    float t_bulk = ke.T_BULK;
+    vector<float> kin = ke.kinetic;
+    float KE = ke.KE;
+    if (this->THERMOSTAT != 0){
+        algos -> velocity_scaling(*this, t_bulk);
+    }
+    if (std::fmod(i, this->PRESS_INTVL) == 0){
+        out -> write_virial(virial, kin, box_VOL, i);
+    };
+    float e_total = eww + ewpt;
+    this -> E_TOTAL = e_total;
+    this -> EWW = eww;
+    this -> T_BULK = t_bulk;
+    out -> write_res(KE, e_total, t_bulk, i);
+    if (std::fmod(i, this->nstxout) == 0){
+        out -> write_xyz(*this, i);
+    }
+};
 void Simulation::read_input(std::string f){
     std::ifstream file(f); // opens file
 
